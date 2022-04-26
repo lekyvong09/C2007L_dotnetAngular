@@ -32,5 +32,16 @@ namespace API.dao
                         .Include(p => p.ProductBrand)
                         .ToListAsync();
         }
+
+        public async Task<List<ProductType>> GetProductTypesAsync()
+        {
+            return await _context.ProductTypes.ToListAsync();
+        }
+
+        public async Task<List<ProductBrand>> GetProductBrandsAsync()
+        {
+            return await _context.ProductBrands.ToListAsync();
+        }
+
     }
 }
