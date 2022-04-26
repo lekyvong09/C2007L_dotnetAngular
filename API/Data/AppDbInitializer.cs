@@ -20,25 +20,25 @@ namespace API.Data
                     context.Database.Migrate();
 
                     /// only insert data if table is empty
-                    if (!context.Products.Any()) {
-                        context.Products.AddRange(new List<Product>()
-                        {
-                            new Product()
-                            {
-                                Name = "Product one"
-                            },
-                            new Product()
-                            {
-                                Name = "Product two"
-                            },
-                            new Product()
-                            {
-                                Name = "Product three"
-                            }
-                        });
+                    // if (!context.Products.Any()) {
+                    //     context.Products.AddRange(new List<Product>()
+                    //     {
+                    //         new Product()
+                    //         {
+                    //             Name = "Product one"
+                    //         },
+                    //         new Product()
+                    //         {
+                    //             Name = "Product two"
+                    //         },
+                    //         new Product()
+                    //         {
+                    //             Name = "Product three"
+                    //         }
+                    //     });
 
-                        context.SaveChanges();
-                    }
+                    //     context.SaveChanges();
+                    // }
                 }
             }
         }
