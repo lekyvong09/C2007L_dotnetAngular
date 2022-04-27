@@ -16,6 +16,7 @@ builder.Services.AddSwaggerGen();
  * Declare Service for injection
  */
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
+builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
 
 
 
