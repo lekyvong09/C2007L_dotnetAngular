@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using API.dao;
 using API.Data;
+using API.Dto;
 using API.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -32,18 +33,36 @@ namespace API.Controllers
             specification.AddIncludes(x => x.ProductBrand);
 
             List<Product> products = await _productRepository.GetEntityListWithSpec(specification);
-            return Ok(products);
+            return Ok(products.Select(product => new ReturnProduct
+            {
+                Id = product.Id,
+                Name = product.Name,
+                Description = product.Description,
+                PictureUrl = product.PictureUrl,
+                Price = product.Price,
+                ProductBrand = product.ProductBrand.Name,
+                ProductType = product.ProductType.Name
+            }).ToList());
         }
 
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<Product>> GetProduct(int id) {
+        public async Task<ActionResult<ReturnProduct>> GetProduct(int id) {
             GenericSpecification<Product> specification = new GenericSpecification<Product>(criteria => criteria.Id == id);
             specification.AddIncludes(x => x.ProductType);
             specification.AddIncludes(x => x.ProductBrand);
 
             Product product = await _productRepository.GetEntityWithSpec(specification);
-            return Ok(product);
+            return Ok(new ReturnProduct 
+            {
+                Id = product.Id,
+                Name = product.Name,
+                Description = product.Description,
+                PictureUrl = product.PictureUrl,
+                Price = product.Price,
+                ProductBrand = product.ProductBrand.Name,
+                ProductType = product.ProductType.Name
+            });
         }
 
         [HttpGet("brands")]
