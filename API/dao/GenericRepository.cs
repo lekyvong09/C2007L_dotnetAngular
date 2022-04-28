@@ -25,5 +25,20 @@ namespace API.dao
         {
             return await _context.Set<T>().FindAsync(id);
         }
+        
+
+        public async Task<T> GetEntityWithSpec(IGenericSpecification<T> specification)
+        {
+            IQueryable<T> inputQuery = _context.Set<T>().AsQueryable();
+            IQueryable<T> outputQuery = GenericSpecificationEvaluator<T>.GetQuery(inputQuery, specification);
+            return await outputQuery.FirstOrDefaultAsync();
+        }
+
+        public async Task<List<T>> GetEntityListWithSpec(IGenericSpecification<T> specification)
+        {
+            IQueryable<T> inputQuery = _context.Set<T>().AsQueryable();
+            IQueryable<T> outputQuery = GenericSpecificationEvaluator<T>.GetQuery(inputQuery, specification);
+            return await outputQuery.ToListAsync();
+        }
     }
 }

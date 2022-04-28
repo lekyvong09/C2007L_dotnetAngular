@@ -10,5 +10,9 @@ namespace API.dao
     {
         Task<List<T>> GetAllAsync();
         Task<T> GetByIdAsync(int id);
+
+        /// inject Where() and Include() into IQuery
+        Task<T> GetEntityWithSpec(IGenericSpecification<T> specification);
+        Task<List<T>> GetEntityListWithSpec(IGenericSpecification<T> specification);
     }
 }
