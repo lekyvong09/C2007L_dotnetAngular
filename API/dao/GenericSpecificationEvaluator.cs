@@ -13,7 +13,7 @@ namespace API.dao
         {
             var query = inputQuery;
 
-            if (specification != null)
+            if (specification.Criteria != null)
             {
                 query = query.Where(specification.Criteria);
             }

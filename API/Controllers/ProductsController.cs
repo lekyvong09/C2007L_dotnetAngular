@@ -27,14 +27,22 @@ namespace API.Controllers
 
         [HttpGet]
         public async Task<ActionResult<List<Product>>> GetProducts() {
-            List<Product> products = await _productRepository.GetAllAsync();
+            GenericSpecification<Product> specification = new GenericSpecification<Product>();
+            specification.AddIncludes(x => x.ProductType);
+            specification.AddIncludes(x => x.ProductBrand);
+
+            List<Product> products = await _productRepository.GetEntityListWithSpec(specification);
             return Ok(products);
         }
 
 
         [HttpGet("{id}")]
         public async Task<ActionResult<Product>> GetProduct(int id) {
-            Product product = await _productRepository.GetByIdAsync(id);
+            GenericSpecification<Product> specification = new GenericSpecification<Product>(criteria => criteria.Id == id);
+            specification.AddIncludes(x => x.ProductType);
+            specification.AddIncludes(x => x.ProductBrand);
+
+            Product product = await _productRepository.GetEntityWithSpec(specification);
             return Ok(product);
         }
 

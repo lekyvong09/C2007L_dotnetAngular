@@ -11,13 +11,14 @@ namespace API.dao
         public Expression<Func<T, bool>> Criteria {get; set;}
         public List<Expression<Func<T, object>>> Includes {get; set;} = new List<Expression<Func<T, object>>>();
 
+        public GenericSpecification() { }
         public GenericSpecification(Expression<Func<T, bool>> criteria)
         {
             Criteria = criteria;
         }
 
         /// add Include Expression into List of Expression
-        protected void AddIncludes(Expression<Func<T, object>> includeExpression)
+        public void AddIncludes(Expression<Func<T, object>> includeExpression)
         {
             Includes.Add(includeExpression);
         }
