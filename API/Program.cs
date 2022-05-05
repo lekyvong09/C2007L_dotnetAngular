@@ -33,6 +33,9 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+/// config to serve static image content
+app.UseStaticFiles();
+
 app.UseAuthorization();
 
 app.MapControllers();
