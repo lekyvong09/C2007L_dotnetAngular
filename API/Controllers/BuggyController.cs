@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using API.Data;
 using API.Entities;
+using API.Exceptions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -26,7 +27,7 @@ namespace API.Controllers
             Product notfoundProduct = _context.Products.Find(1000);
             if (notfoundProduct == null)
             {
-                return NotFound();
+                return NotFound(new ErrorResponse(404, "test not found on buggy controller"));
             }
 
             return Ok();
@@ -47,7 +48,7 @@ namespace API.Controllers
         [HttpGet("badrequest")]
         public ActionResult GetBadRequest()
         {
-            return BadRequest();
+            return BadRequest(new ErrorResponse(400));
         }
 
         [HttpGet("badrequest/{id}")]

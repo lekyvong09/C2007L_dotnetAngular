@@ -21,8 +21,10 @@
   <ItemGroup>
     <None Remove="Helpers\" />
     <None Remove="Microsoft.VisualStudio.Web.CodeGeneration.Design" />
+    <None Remove="Exceptions\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Helpers\" />
+    <Folder Include="Exceptions\" />
   </ItemGroup>
 </Project>
