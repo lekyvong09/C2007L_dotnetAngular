@@ -9,7 +9,9 @@ namespace API.Helpers
 	{
 		public MyAutoMapper()
 		{
-			CreateMap<Product, ReturnProduct>();
+			CreateMap<Product, ReturnProduct>()
+				.ForMember(d => d.ProductBrand, o => o.MapFrom(s => s.ProductBrand.Name))
+				.ForMember(d => d.ProductType, o => o.MapFrom(s => s.ProductType.Name));
 		}
 	}
 }

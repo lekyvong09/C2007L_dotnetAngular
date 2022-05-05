@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -6,6 +6,7 @@ using API.dao;
 using API.Data;
 using API.Dto;
 using API.Entities;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -18,12 +19,14 @@ namespace API.Controllers
         private IGenericRepository<Product> _productRepository;
         private IGenericRepository<ProductBrand> _productBrandRepository;
         private IGenericRepository<ProductType> _productTypeRepository;
+        private IMapper _mapper;
 
-        public ProductsController(IGenericRepository<Product> productRepository, IGenericRepository<ProductBrand> productBrandRepository, IGenericRepository<ProductType> productTypeRepository)
+        public ProductsController(IGenericRepository<Product> productRepository, IGenericRepository<ProductBrand> productBrandRepository, IGenericRepository<ProductType> productTypeRepository, IMapper mapper)
         {
             _productRepository = productRepository;
             _productBrandRepository = productBrandRepository;
             _productTypeRepository = productTypeRepository;
+            _mapper = mapper;
         }
 
         [HttpGet]
@@ -33,16 +36,17 @@ namespace API.Controllers
             specification.AddIncludes(x => x.ProductBrand);
 
             List<Product> products = await _productRepository.GetEntityListWithSpec(specification);
-            return Ok(products.Select(product => new ReturnProduct
-            {
-                Id = product.Id,
-                Name = product.Name,
-                Description = product.Description,
-                PictureUrl = product.PictureUrl,
-                Price = product.Price,
-                ProductBrand = product.ProductBrand.Name,
-                ProductType = product.ProductType.Name
-            }).ToList());
+            //return Ok(products.Select(product => new ReturnProduct
+            //{
+            //    Id = product.Id,
+            //    Name = product.Name,
+            //    Description = product.Description,
+            //    PictureUrl = product.PictureUrl,
+            //    Price = product.Price,
+            //    ProductBrand = product.ProductBrand.Name,
+            //    ProductType = product.ProductType.Name
+            //}).ToList());
+            return Ok(_mapper.Map<List<Product>, List<ReturnProduct>>(products));
         }
 
 
@@ -53,16 +57,7 @@ namespace API.Controllers
             specification.AddIncludes(x => x.ProductBrand);
 
             Product product = await _productRepository.GetEntityWithSpec(specification);
-            return Ok(new ReturnProduct 
-            {
-                Id = product.Id,
-                Name = product.Name,
-                Description = product.Description,
-                PictureUrl = product.PictureUrl,
-                Price = product.Price,
-                ProductBrand = product.ProductBrand.Name,
-                ProductType = product.ProductType.Name
-            });
+            return Ok(_mapper.Map<Product, ReturnProduct>(product));
         }
 
         [HttpGet("brands")]
