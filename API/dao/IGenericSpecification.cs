@@ -16,5 +16,10 @@ namespace API.dao
         /// to sort price column (order by)
         Expression<Func<T, object>> OrderBy { get; set; }
         Expression<Func<T, object>> OrderByDesc { get; set; }
+
+        /// pagination
+        int Take { get; set; }
+        int Skip { get; set; }
+        bool IsPaginationEnabled { get; set; }
     }
 }

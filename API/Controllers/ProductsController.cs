@@ -30,7 +30,7 @@ namespace API.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<Product>>> GetProducts(string sort, int? brandId, int? typeId) {
+        public async Task<ActionResult<List<Product>>> GetProducts(int currentPageNumber, int pageSize, string sort, int? brandId, int? typeId) {
             GenericSpecification<Product> specification = new GenericSpecification<Product>(
                 x =>
                     (!brandId.HasValue || x.ProductBrandId == brandId)
@@ -39,6 +39,7 @@ namespace API.Controllers
 
             specification.AddIncludes(x => x.ProductType);
             specification.AddIncludes(x => x.ProductBrand);
+            specification.ApplyPagination((currentPageNumber - 1) * pageSize, pageSize);
 
             if (sort != null)
             {

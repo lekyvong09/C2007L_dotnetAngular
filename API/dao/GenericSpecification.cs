@@ -12,6 +12,9 @@ namespace API.dao
         public List<Expression<Func<T, object>>> Includes {get; set;} = new List<Expression<Func<T, object>>>();
         public Expression<Func<T, object>> OrderBy { get; set; }
         public Expression<Func<T, object>> OrderByDesc { get; set; }
+        public int Take { get; set; }
+        public int Skip { get; set; }
+        public bool IsPaginationEnabled { get; set; }
 
         public GenericSpecification() { }
         public GenericSpecification(Expression<Func<T, bool>> criteria)
@@ -33,6 +36,13 @@ namespace API.dao
         public void AddOrderByDesc(Expression<Func<T, object>> orderByDescExpression)
         {
             OrderByDesc = orderByDescExpression;
+        }
+
+        public void ApplyPagination(int skip, int take)
+        {
+            Skip = skip;
+            Take = take;
+            IsPaginationEnabled = true;
         }
     }
 }

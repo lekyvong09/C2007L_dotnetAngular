@@ -17,8 +17,6 @@ namespace API.dao
             {
                 query = query.Where(specification.Criteria);
             }
-            
-            query = specification.Includes.Aggregate(query, (current, include) => current.Include(include));
 
             /// add orderBy criteria into LINQ Iqueryable
             if (specification.OrderBy != null)
@@ -30,6 +28,14 @@ namespace API.dao
             {
                 query = query.OrderByDescending(specification.OrderByDesc);
             }
+
+            /// pagination
+            if (specification.IsPaginationEnabled)
+            {
+                query = query.Skip(specification.Skip).Take(specification.Take);
+            }
+
+            query = specification.Includes.Aggregate(query, (current, include) => current.Include(include));
 
             return query;
         }
