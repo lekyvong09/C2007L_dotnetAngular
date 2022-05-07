@@ -34,6 +34,7 @@ namespace API.Controllers
             GenericSpecification<Product> specification = new GenericSpecification<Product>();
             specification.AddIncludes(x => x.ProductType);
             specification.AddIncludes(x => x.ProductBrand);
+            specification.AddOrderBy(x => x.Name);
 
             List<Product> products = await _productRepository.GetEntityListWithSpec(specification);
             //return Ok(products.Select(product => new ReturnProduct

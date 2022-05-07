@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -12,5 +12,9 @@ namespace API.dao
         Expression<Func<T, bool>> Criteria {get; set;}
 
         List<Expression<Func<T, object>>> Includes {get; set;}
+
+        /// to sort price column (order by)
+        Expression<Func<T, object>> OrderBy { get; set; }
+        Expression<Func<T, object>> OrderByDesc { get; set; }
     }
 }
