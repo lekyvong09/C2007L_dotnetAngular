@@ -30,8 +30,11 @@ namespace API.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<Product>>> GetProducts(string sort) {
-            GenericSpecification<Product> specification = new GenericSpecification<Product>();
+        public async Task<ActionResult<List<Product>>> GetProducts(string sort, int brandId, int typeId) {
+            GenericSpecification<Product> specification = new GenericSpecification<Product>(
+                x => (x.ProductBrandId == brandId) && (x.ProductTypeId == typeId)
+            );
+
             specification.AddIncludes(x => x.ProductType);
             specification.AddIncludes(x => x.ProductBrand);
 
