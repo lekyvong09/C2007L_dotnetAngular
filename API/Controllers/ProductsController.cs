@@ -30,11 +30,31 @@ namespace API.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<Product>>> GetProducts() {
+        public async Task<ActionResult<List<Product>>> GetProducts(string sort) {
             GenericSpecification<Product> specification = new GenericSpecification<Product>();
             specification.AddIncludes(x => x.ProductType);
             specification.AddIncludes(x => x.ProductBrand);
-            specification.AddOrderBy(x => x.Name);
+
+            if (sort != null)
+            {
+                switch (sort)
+                {
+                    case "priceAsc":
+                        specification.AddOrderBy(x => x.Price);
+                        break;
+                    case "priceDesc":
+                        specification.AddOrderByDesc(x => x.Price);
+                        break;
+                    default:
+                        specification.AddOrderBy(x => x.Price);
+                        break;
+                }
+            }
+            else
+            {
+                specification.AddOrderBy(x => x.Price);
+            }
+
 
             List<Product> products = await _productRepository.GetEntityListWithSpec(specification);
             //return Ok(products.Select(product => new ReturnProduct
