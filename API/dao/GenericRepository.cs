@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -39,6 +39,13 @@ namespace API.dao
             IQueryable<T> inputQuery = _context.Set<T>().AsQueryable();
             IQueryable<T> outputQuery = GenericSpecificationEvaluator<T>.GetQuery(inputQuery, specification);
             return await outputQuery.ToListAsync();
+        }
+
+        public async Task<int> CountAsync(IGenericSpecification<T> specification)
+        {
+            IQueryable<T> inputQuery = _context.Set<T>().AsQueryable();
+            IQueryable<T> outputQuery = GenericSpecificationEvaluator<T>.GetQuery(inputQuery, specification);
+            return await outputQuery.CountAsync();
         }
     }
 }

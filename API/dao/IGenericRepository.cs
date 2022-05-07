@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -14,5 +14,8 @@ namespace API.dao
         /// inject Where() and Include() into IQuery
         Task<T> GetEntityWithSpec(IGenericSpecification<T> specification);
         Task<List<T>> GetEntityListWithSpec(IGenericSpecification<T> specification);
+
+        /// get total records for pagination
+        Task<int> CountAsync(IGenericSpecification<T> specification);
     }
 }

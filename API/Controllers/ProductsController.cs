@@ -6,6 +6,7 @@ using API.dao;
 using API.Data;
 using API.Dto;
 using API.Entities;
+using API.Helpers;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -30,16 +31,20 @@ namespace API.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<Product>>> GetProducts(int currentPageNumber, int pageSize, string sort, int? brandId, int? typeId) {
+        public async Task<ActionResult<PageList<ReturnProduct>>> GetProducts(string sort, int? brandId, int? typeId,
+                [FromQuery]PaginationParams pagination) {
             GenericSpecification<Product> specification = new GenericSpecification<Product>(
                 x =>
                     (!brandId.HasValue || x.ProductBrandId == brandId)
                     && (!typeId.HasValue || x.ProductTypeId == typeId)
             );
 
+            /// get total records for Pagination apply apply condition where but before apply Pagination
+            int totalRecord = await _productRepository.CountAsync(specification);
+
             specification.AddIncludes(x => x.ProductType);
             specification.AddIncludes(x => x.ProductBrand);
-            specification.ApplyPagination((currentPageNumber - 1) * pageSize, pageSize);
+            specification.ApplyPagination((pagination.PageNumber - 1) * pagination.PageSize, pagination.PageSize);
 
             if (sort != null)
             {
@@ -63,17 +68,11 @@ namespace API.Controllers
 
 
             List<Product> products = await _productRepository.GetEntityListWithSpec(specification);
-            //return Ok(products.Select(product => new ReturnProduct
-            //{
-            //    Id = product.Id,
-            //    Name = product.Name,
-            //    Description = product.Description,
-            //    PictureUrl = product.PictureUrl,
-            //    Price = product.Price,
-            //    ProductBrand = product.ProductBrand.Name,
-            //    ProductType = product.ProductType.Name
-            //}).ToList());
-            return Ok(_mapper.Map<List<Product>, List<ReturnProduct>>(products));
+            List<ReturnProduct> returnData = _mapper.Map<List<Product>, List<ReturnProduct>>(products);
+
+            var endResult = new PageList<ReturnProduct>(returnData, pagination.PageNumber, pagination.PageSize, totalRecord);
+
+            return Ok(endResult);
         }
 
 
