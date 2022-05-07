@@ -3,6 +3,8 @@ using API.Data;
 using Microsoft.EntityFrameworkCore;
 using API.Helpers;
 using API.Middleware;
+using Microsoft.AspNetCore.Mvc;
+using API.Exceptions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,6 +12,24 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("AnyConnectionName")));
 
 builder.Services.AddControllers();
+/// for validate input error messages. Config option for controller attribute [ApiController]
+builder.Services.Configure<ApiBehaviorOptions>(options =>
+{
+    options.InvalidModelStateResponseFactory = actionContext =>
+    {
+        var errors = actionContext.ModelState
+            .Where(e => e.Value.Errors.Count > 0)
+            .SelectMany(x => x.Value.Errors)
+            .Select(x => x.ErrorMessage);
+
+        var response = new ValidateInputErrorResponse(400)
+        {
+            Errors = errors
+        };
+        return new BadRequestObjectResult(response);
+    };
+});
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
