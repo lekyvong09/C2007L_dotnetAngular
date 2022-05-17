@@ -1,10 +1,30 @@
+# Run project
+### API
+- Change database connection in appsettings.json or appsettings.Development.json
+```
+dotnet watch run
+```
+### Angular
+```
+npm install
+ng serve
+```
+
 # Create project
+### API
 ```
 cd ../project
 dotnet new sln
 dotnet new webapi -o API
 dotnet sln add API/
 ```
+### Client Angular
+```
+npm install -g @angular/cli
+ng version
+ng new <projectName>
+```
+
 ### Visual Code extension
 - C# of OmniSharp
 - C# Extensions of JosKreativ
