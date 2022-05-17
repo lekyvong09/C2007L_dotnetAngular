@@ -31,12 +31,14 @@ namespace API.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<PageList<ReturnProduct>>> GetProducts(string sort, int? brandId, int? typeId,
+        public async Task<ActionResult<PageList<ReturnProduct>>> GetProducts(
+                [FromQuery]ProductRequestParams productRequestParams,
                 [FromQuery]PaginationParams pagination) {
             GenericSpecification<Product> specification = new GenericSpecification<Product>(
                 x =>
-                    (!brandId.HasValue || x.ProductBrandId == brandId)
-                    && (!typeId.HasValue || x.ProductTypeId == typeId)
+                    (string.IsNullOrEmpty(productRequestParams.Search) || x.Name.ToLower().Contains(productRequestParams.Search))
+                    && (!productRequestParams.BrandId.HasValue || x.ProductBrandId == productRequestParams.BrandId)
+                    && (!productRequestParams.TypeId.HasValue || x.ProductTypeId == productRequestParams.TypeId)
             );
 
             /// get total records for Pagination apply apply condition where but before apply Pagination
@@ -46,9 +48,9 @@ namespace API.Controllers
             specification.AddIncludes(x => x.ProductBrand);
             specification.ApplyPagination((pagination.PageNumber - 1) * pagination.PageSize, pagination.PageSize);
 
-            if (sort != null)
+            if (productRequestParams.Sort != null)
             {
-                switch (sort)
+                switch (productRequestParams.Sort)
                 {
                     case "priceAsc":
                         specification.AddOrderBy(x => x.Price);

@@ -1,9 +1,21 @@
 ﻿<Properties StartupConfiguration="{3B42A330-DA15-4351-9957-85E45BBF709B}|Default">
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.ItemProperties.API PreferredExecutionTarget="/Applications/Google Chrome.app" />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.Workbench ActiveDocument="API/Controllers/ProductsController.cs">
     <Files>
-      <File FileName="API/Controllers/ProductsController.cs" Line="1" Column="1" />
-      <File FileName="API/Controllers/BuggyController.cs" Line="34" Column="10" />
+      <File FileName="API/dao/GenericRepository.cs" Line="44" Column="81" />
+      <File FileName="API/dao/GenericSpecification.cs" Line="29" Column="10" />
+      <File FileName="API/dao/IGenericSpecification.cs" Line="23" Column="47" />
+      <File FileName="API/dao/GenericSpecificationEvaluator.cs" Line="35" Column="81" />
+      <File FileName="API/Controllers/ProductsController.cs" Line="68" Column="1" />
+      <File FileName="API/Helpers/PaginationParams.cs" Line="18" Column="1" />
+      <File FileName="API/Helpers/PageList.cs" Line="6" Column="42" />
+      <File FileName="API/dao/IGenericRepository.cs" Line="19" Column="70" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -13,9 +25,8 @@
               <Node name="Controllers" expanded="True">
                 <Node name="ProductsController.cs" selected="True" />
               </Node>
-              <Node name="Entities" expanded="True" />
-              <Node name="Exceptions" expanded="True" />
-              <Node name="Middleware" expanded="True" />
+              <Node name="dao" expanded="True" />
+              <Node name="Helpers" expanded="True" />
             </Node>
           </Node>
         </State>
@@ -25,10 +36,4 @@
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
-  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
-  <MultiItemStartupConfigurations />
-  <MonoDevelop.Ide.ItemProperties.API PreferredExecutionTarget="/Applications/Google Chrome.app" />
-  <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
-  </MonoDevelop.Ide.DebuggingService.Breakpoints>
 </Properties>
