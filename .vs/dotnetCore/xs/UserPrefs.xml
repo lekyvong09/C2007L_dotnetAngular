@@ -1,21 +1,13 @@
 ﻿<Properties StartupConfiguration="{3B42A330-DA15-4351-9957-85E45BBF709B}|Default">
-  <MultiItemStartupConfigurations />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
-  <MonoDevelop.Ide.ItemProperties.API PreferredExecutionTarget="/Applications/Google Chrome.app" />
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MultiItemStartupConfigurations />
   <MonoDevelop.Ide.Workbench ActiveDocument="API/Controllers/ProductsController.cs">
     <Files>
-      <File FileName="API/dao/GenericRepository.cs" Line="44" Column="81" />
-      <File FileName="API/dao/GenericSpecification.cs" Line="29" Column="10" />
-      <File FileName="API/dao/IGenericSpecification.cs" Line="23" Column="47" />
-      <File FileName="API/dao/GenericSpecificationEvaluator.cs" Line="35" Column="81" />
-      <File FileName="API/Controllers/ProductsController.cs" Line="68" Column="1" />
-      <File FileName="API/Helpers/PaginationParams.cs" Line="18" Column="1" />
-      <File FileName="API/Helpers/PageList.cs" Line="6" Column="42" />
-      <File FileName="API/dao/IGenericRepository.cs" Line="19" Column="70" />
+      <File FileName="API/Controllers/ProductsController.cs" Line="42" Column="15" />
+      <File FileName="API/Helpers/ProductRequestParams.cs" Line="16" Column="4" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -36,4 +28,6 @@
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.ItemProperties.API PreferredExecutionTarget="/Applications/Google Chrome.app" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
 </Properties>
