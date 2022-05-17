@@ -53,3 +53,7 @@ $ dotnet ef database update
 PS> drop-database
 $ dotnet ef database drop
 ```
+
+
+# Angular install certificate
+- https://windowsreport.com/install-windows-10-root-certificates/
