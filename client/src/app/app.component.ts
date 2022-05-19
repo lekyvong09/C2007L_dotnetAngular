@@ -11,19 +11,10 @@ import { IProduct } from './_models/product';
 })
 export class AppComponent implements OnInit {
   title = 'Book shop';
-  products: IProduct[] = [];
 
-  constructor(private http: HttpClient) { }
+  constructor() { }
 
   ngOnInit(): void {
-     this.http.get<IPagination>('https://localhost:5001/api/products').subscribe(
-       (response: IPagination) => {
-         console.log(response);
-         this.products = response.data;
-       }, error => {
-         console.log(error);
-       }
-     );
   }
 
 
