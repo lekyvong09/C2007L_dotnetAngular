@@ -36,6 +36,17 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddAutoMapper(typeof(MyAutoMapper));
 
 /**
+ * Configure CORS policy
+ */
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(policy =>
+    {
+        policy.AllowAnyHeader().AllowAnyMethod().WithOrigins("https://localhost:4200");
+    });
+});
+
+/**
  * Declare Service for injection
  */
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
@@ -61,6 +72,8 @@ app.UseHttpsRedirection();
 
 /// config to serve static image content
 app.UseStaticFiles();
+
+app.UseCors();
 
 app.UseAuthorization();
 
