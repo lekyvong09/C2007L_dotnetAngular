@@ -9,6 +9,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AppComponent implements OnInit {
   title = 'Book shop';
+  products: any[] = [];
 
   constructor(private http: HttpClient) { }
 
@@ -16,6 +17,7 @@ export class AppComponent implements OnInit {
      this.http.get('https://localhost:5001/api/products').subscribe(
        (response: any) => {
          console.log(response);
+         this.products = response.data;
        }, error => {
          console.log(error);
        }
