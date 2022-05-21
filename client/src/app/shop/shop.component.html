@@ -63,6 +63,19 @@
               </div>
             </div>
 
+            <div class="d-flex justify-content-center py-4">
+                <pagination 
+                [boundaryLinks]="true" 
+                [totalItems]="this.totalCount"
+                [itemsPerPage]="this.pageSize"
+                (pageChanged)="onPageChange($event)"
+                previousText="&lsaquo;" 
+                nextText="&rsaquo;" 
+                firstText="&laquo;" 
+                lastText="&raquo;"
+            ></pagination>
+            </div>
+
         </section>
     </div>
 </div>

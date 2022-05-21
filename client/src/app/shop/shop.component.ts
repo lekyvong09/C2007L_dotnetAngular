@@ -22,6 +22,10 @@ export class ShopComponent implements OnInit {
   brandIdSelected: number = 0;
   typeIdSelected: number = 0;
   sortSelected = 'name';
+  pageNumber = 1;
+  pageSize = 3;
+  totalCount = 0;
+
   sortOptions = [
     {name: 'Alphabetical', value:'name'},
     {name: 'Price: Low to High', value:'priceAsc'},
@@ -37,9 +41,13 @@ export class ShopComponent implements OnInit {
   }
 
   getProducts(): void {
-    this.shopService.getProducts(this.brandIdSelected, this.typeIdSelected, this.sortSelected).subscribe(response => {
+    this.shopService.getProducts(this.pageNumber, this.pageSize, this.brandIdSelected, this.typeIdSelected, this.sortSelected)
+          .subscribe(response => {
       console.log(response);
       this.products = response!.data;
+      this.pageNumber = response!.pageNumber;
+      this.pageSize = response!.pageSize;
+      this.totalCount = response!.totalCount;
     }, error => {
       console.log(error);
     });
@@ -69,6 +77,11 @@ export class ShopComponent implements OnInit {
 
   onSortSelect(event: Event) {
     this.sortSelected = (<HTMLSelectElement>event.target).value;
+    this.getProducts();
+  }
+
+  onPageChange(event: any) {
+    this.pageNumber = event.page;
     this.getProducts();
   }
 }
