@@ -10,12 +10,26 @@
 
             <h5 class="fw-bold ml-3">Category</h5>
             <ul class="list-group mb-3">
-                <li class="list-group-item" *ngFor="let productType of productTypes">{{productType.name}}</li>
+                <li class="list-group-item" 
+                    *ngFor="let productType of productTypes"
+                    [value] = "productType.id"
+                    (click) = "onProductTypeSelect(productType.id)"
+                    [ngClass]="{'active': productType.id === this.typeIdSelected}"
+                >
+                    {{productType.name}}
+                </li>
             </ul>
-            
+
             <h5 class="fw-bold ml-3">Publisher</h5>
             <ul class="list-group mb-3">
-                <li class="list-group-item" *ngFor="let brand of brands">{{brand.name}}</li>
+                <li class="list-group-item" 
+                    *ngFor="let brand of brands"
+                    [value] = "brand.id"
+                    (click) = "onBrandSelect(brand.id)"
+                    [ngClass]="{'active': brand.id === this.brandIdSelected}"
+                >
+                    {{brand.name}}
+                </li>
             </ul>
 
         </section>
