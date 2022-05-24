@@ -5,10 +5,11 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ShopModule } from './shop/shop.module';
 import { SharedModule } from './shared/shared.module';
 import { TestErrorModule } from './test-error/test-error.module';
+import { ErrorInterceptor } from './_interceptor/error.interceptor';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,9 @@ import { TestErrorModule } from './test-error/test-error.module';
     SharedModule,
     TestErrorModule,
   ],
-  providers: [],
+  providers: [
+    {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
