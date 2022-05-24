@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
 import { IBrand } from '../_models/brand';
 import { IPagination } from '../_models/pagination';
+import { IProduct } from '../_models/product';
 import { IType } from '../_models/product-type';
 
 @Injectable({
@@ -41,6 +42,10 @@ export class ShopService {
             return response.body
           })
         );
+  }
+
+  getProduct(id: number) {
+    return this.http.get<IProduct>(`${this.baseUrl}products/${id}`);
   }
 
   getBrands(): Observable<IBrand[]> {
