@@ -1,11 +1,10 @@
 <div class="d-flex flex-column flex-md-row align-items-center pb-3 mb-4 border-bottom">
-    <img src="/assets/images/logo.png" style="max-height: 70px;" class="ms-3" alt="logo" />
+    <img src="/assets/images/logo.png" style="max-height: 70px;" class="ms-3" alt="logo" routerLink="/" />
     
     <nav class="d-flex flex-grow-1 justify-content-center mt-2 mt-md-0 text-uppercase" style="font-size: large;">
-      <a class="me-5 py-2 text-dark text-decoration-none" href="#">Features</a>
-      <a class="me-5 py-2 text-dark text-decoration-none" href="#">Enterprise</a>
-      <a class="me-5 py-2 text-dark text-decoration-none" href="#">Support</a>
-      <a class="me-5 py-2 text-dark text-decoration-none" href="#">Pricing</a>
+      <a class="me-5 py-2 text-dark text-decoration-none" routerLink="/">Home</a>
+      <a class="me-5 py-2 text-dark text-decoration-none" [routerLink]="['/shop']">Shop</a>
+      <a class="me-5 py-2 text-dark text-decoration-none" href="#">Contact</a>
     </nav>
 
     <div class="d-flex align-items-center">
