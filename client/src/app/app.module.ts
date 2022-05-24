@@ -8,6 +8,7 @@ import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ShopModule } from './shop/shop.module';
 import { SharedModule } from './shared/shared.module';
+import { TestErrorModule } from './test-error/test-error.module';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { SharedModule } from './shared/shared.module';
     HttpClientModule,
     ShopModule,
     SharedModule,
+    TestErrorModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
