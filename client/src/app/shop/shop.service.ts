@@ -13,7 +13,7 @@ export class ShopService {
 
   constructor(private http: HttpClient) { }
 
-  getProducts(pageNumber: number, pageSize: number, brandId?: number, typeId?: number, sort?: string): Observable<IPagination | null> {
+  getProducts(pageNumber: number, pageSize: number, brandId?: number, typeId?: number, sort?: string, search?: string): Observable<IPagination | null> {
     let params = new HttpParams();
 
     if (brandId){
@@ -26,6 +26,10 @@ export class ShopService {
 
     if (sort) {
       params = params.append('sort', sort);
+    }
+
+    if (search) {
+      params = params.append('search', search);
     }
 
     params = params.append('pageNumber', pageNumber.toString());

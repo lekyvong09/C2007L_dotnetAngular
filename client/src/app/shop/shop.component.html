@@ -45,15 +45,22 @@
 
                 <div class="row align-items-center">
                     <div class="col">
-                        <input type="text" class="form-control" style="width: 200px;" placeholder="Search">
+                        <input #search 
+                            type="text" 
+                            class="form-control" 
+                            style="width: 200px;" 
+                            placeholder="Search"
+                            (keyup.enter)="onSearch()"
+                            (keyup.escape)="onReset()"
+                        >
                     </div>
                     <div class="col">
-                        <button class="btn btn-outline-primary my-2">
+                        <button (click)="onSearch()" class="btn btn-outline-primary my-2">
                             <fa-icon [icon]="faSearch"></fa-icon>
                         </button>
                     </div>
                     <div class="col">
-                        <button class="btn btn-outline-success my-2">
+                        <button (click)="onReset()" class="btn btn-outline-success my-2">
                             <fa-icon [icon]="faRefresh"></fa-icon>
                         </button>
                     </div>

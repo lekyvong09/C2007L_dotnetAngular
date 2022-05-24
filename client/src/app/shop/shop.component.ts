@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { IProduct } from '../_models/product';
 import { ShopService } from './shop.service';
 
@@ -12,6 +12,12 @@ import { IType } from '../_models/product-type';
   styleUrls: ['./shop.component.scss']
 })
 export class ShopComponent implements OnInit {
+  /**
+   * {static: true} means we don't use *ngIf
+   * {static: false} means we use *ngIf
+   */
+  @ViewChild('search', {static: true}) searchElement: ElementRef | undefined;
+
   /// fontawesome icon
   faSearch = faSearch; faRefresh = faRefresh;
 
@@ -25,6 +31,7 @@ export class ShopComponent implements OnInit {
   pageNumber = 1;
   pageSize = 3;
   totalCount = 0;
+  search= '';
 
   sortOptions = [
     {name: 'Alphabetical', value:'name'},
@@ -41,9 +48,9 @@ export class ShopComponent implements OnInit {
   }
 
   getProducts(): void {
-    this.shopService.getProducts(this.pageNumber, this.pageSize, this.brandIdSelected, this.typeIdSelected, this.sortSelected)
+    this.shopService.getProducts(this.pageNumber, this.pageSize, this.brandIdSelected, this.typeIdSelected, this.sortSelected, this.search)
           .subscribe(response => {
-      console.log(response);
+      // console.log(response);
       this.products = response!.data;
       this.pageNumber = response!.pageNumber;
       this.pageSize = response!.pageSize;
@@ -67,21 +74,41 @@ export class ShopComponent implements OnInit {
 
   onBrandSelect(brandId: number) {
     this.brandIdSelected = brandId;
+    this.pageNumber = 1;
     this.getProducts();
   }
 
   onProductTypeSelect(typeId: number) {
     this.typeIdSelected = typeId;
+    this.pageNumber = 1;
     this.getProducts();
   }
 
   onSortSelect(event: Event) {
     this.sortSelected = (<HTMLSelectElement>event.target).value;
+    this.pageNumber = 1;
     this.getProducts();
   }
 
   onPageChange(event: any) {
     this.pageNumber = event;
+    this.getProducts();
+  }
+
+  onSearch() {
+    this.search = this.searchElement?.nativeElement.value;
+    this.getProducts();
+  }
+
+  onReset() {
+    this.searchElement!.nativeElement.value = '';
+    this.brandIdSelected = 0;
+    this.typeIdSelected = 0;
+    this.sortSelected = 'name';
+    this.pageNumber = 1;
+    this.pageSize = 3;
+    this.totalCount = 0;
+    this.search = '';
     this.getProducts();
   }
 }
