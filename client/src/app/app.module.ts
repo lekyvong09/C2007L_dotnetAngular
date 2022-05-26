@@ -6,22 +6,21 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { ShopModule } from './shop/shop.module';
 import { SharedModule } from './shared/shared.module';
 import { TestErrorModule } from './test-error/test-error.module';
 import { ErrorInterceptor } from './_interceptor/error.interceptor';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
     AppComponent,
-    NavBarComponent
+    NavBarComponent,
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
     BrowserAnimationsModule,
+    AppRoutingModule,
     HttpClientModule,
-    ShopModule,
     SharedModule,
     TestErrorModule,
   ],
