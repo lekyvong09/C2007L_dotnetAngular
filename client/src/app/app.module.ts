@@ -9,6 +9,8 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { SharedModule } from './shared/shared.module';
 import { TestErrorModule } from './test-error/test-error.module';
 import { ErrorInterceptor } from './_interceptor/error.interceptor';
+import { NgxSpinnerModule } from "ngx-spinner";
+import { LoadingInterceptor } from './_interceptor/loading.interceptor';
 import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
@@ -23,9 +25,15 @@ import { ToastrModule } from 'ngx-toastr';
     HttpClientModule,
     SharedModule,
     TestErrorModule,
+    NgxSpinnerModule,
+    ToastrModule.forRoot({
+      positionClass: 'toast-bottom-right',
+      preventDuplicates: true
+    }),
   ],
   providers: [
-    {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true}
+    {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
+    {provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true},
   ],
   bootstrap: [AppComponent]
 })
