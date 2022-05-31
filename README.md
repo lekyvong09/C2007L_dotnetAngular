@@ -57,3 +57,17 @@ $ dotnet ef database drop
 
 # Angular install certificate
 - https://windowsreport.com/install-windows-10-root-certificates/
+
+
+# Redis
+- Install docker desktop
+- Run "docker pull redis"
+- Run "docker run --name redis -p 6379:6379 -d redis redis-server --appendonly yes"
+- Access to Redis server.
+```
+docker ps
+docker exec -it <containerId> sh
+redis-server# redis-cli
+127.0.0.1:6379> ping
+-> expect to return PONG
+```
