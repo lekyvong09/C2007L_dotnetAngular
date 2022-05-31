@@ -57,7 +57,7 @@ builder.Services.AddCors(options =>
  */
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
-
+builder.Services.AddScoped<IBasketRepository, BasketRepository>();
 
 
 var app = builder.Build();
