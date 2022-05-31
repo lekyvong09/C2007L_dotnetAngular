@@ -1,13 +1,20 @@
 ﻿<Properties StartupConfiguration="{3B42A330-DA15-4351-9957-85E45BBF709B}|Default">
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.ItemProperties.API PreferredExecutionTarget="/Applications/Google Chrome.app" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
-  <MultiItemStartupConfigurations />
-  <MonoDevelop.Ide.Workbench ActiveDocument="API/Controllers/ProductsController.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="API/Controllers/BasketController.cs">
     <Files>
-      <File FileName="API/Controllers/ProductsController.cs" Line="42" Column="15" />
-      <File FileName="API/Helpers/ProductRequestParams.cs" Line="16" Column="4" />
+      <File FileName="API/Controllers/ProductsController.cs" Line="18" Column="37" />
+      <File FileName="API/Entities/CustomerBasket.cs" Line="17" Column="10" />
+      <File FileName="API/Entities/BasketItem.cs" Line="18" Column="42" />
+      <File FileName="API/Entities/Product.cs" Line="12" Column="41" />
+      <File FileName="API/dao/IBasketRepository.cs" Line="6" Column="36" />
+      <File FileName="API/dao/BasketRepository.cs" Line="34" Column="1" />
+      <File FileName="API/Controllers/BasketController.cs" Line="17" Column="10" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -15,9 +22,10 @@
           <Node name="dotnetCore" expanded="True">
             <Node name="API" expanded="True">
               <Node name="Controllers" expanded="True">
-                <Node name="ProductsController.cs" selected="True" />
+                <Node name="BasketController.cs" selected="True" />
               </Node>
               <Node name="dao" expanded="True" />
+              <Node name="Entities" expanded="True" />
               <Node name="Helpers" expanded="True" />
             </Node>
           </Node>
@@ -28,6 +36,4 @@
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
-  <MonoDevelop.Ide.ItemProperties.API PreferredExecutionTarget="/Applications/Google Chrome.app" />
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
 </Properties>
