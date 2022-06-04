@@ -21,7 +21,7 @@ export class AppComponent implements OnInit {
 
     if (basketId) {
       this.basketService.getBasket(basketId).subscribe(() => {
-        console.log('basket is initialized');
+        // console.log('basket is initialized');
       }, error => console.log(error));
     }
   }
