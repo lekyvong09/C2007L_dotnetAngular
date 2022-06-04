@@ -6,12 +6,14 @@ import { PagingHeaderComponent } from './paging-header/paging-header.component';
 import { PagerComponent } from './pager/pager.component';
 import { SectionHeaderComponent } from './section-header/section-header.component';
 import { BreadcrumbModule } from 'xng-breadcrumb';
+import { OrderTotalsComponent } from './order-totals/order-totals.component';
 
 @NgModule({
   declarations: [
     PagingHeaderComponent,
     PagerComponent,
-    SectionHeaderComponent
+    SectionHeaderComponent,
+    OrderTotalsComponent
   ],
   imports: [
     CommonModule,
@@ -25,6 +27,7 @@ import { BreadcrumbModule } from 'xng-breadcrumb';
     PagingHeaderComponent,
     PagerComponent,
     SectionHeaderComponent,
+    OrderTotalsComponent,
   ]
 })
 export class SharedModule { }

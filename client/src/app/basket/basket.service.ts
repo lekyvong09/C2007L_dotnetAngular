@@ -71,6 +71,44 @@ export class BasketService {
     this.setBasket(basket);
   }
 
+  incrementItemQuantity(item: IBasketItem) {
+    let basket = this.getCurrentBasketValue();
+    let index = basket.items.findIndex(x => x.id === item.id);
+    basket.items[index].quantity++;
+    this.setBasket(basket);
+  }
+
+  decrementItemQuantity(item: IBasketItem) {
+    let basket = this.getCurrentBasketValue();
+    let index = basket.items.findIndex(x => x.id === item.id);
+    if (basket.items[index].quantity > 1) {
+      basket.items[index].quantity--;
+      this.setBasket(basket);
+    } else {
+      this.removeItemFromBasket(item);
+    }
+  }
+
+  removeItemFromBasket(item: IBasketItem) {
+    let basket = this.getCurrentBasketValue();
+    if (basket.items.some(x => x.id === item.id)) {
+      basket.items = basket.items.filter(i => i.id !== item.id);
+      if (basket.items.length > 0 ) {
+        this.setBasket(basket);
+      } else {
+        this.deleteBasket(basket);
+      }
+    }
+  }
+
+  deleteBasket(basket: IBasket) {
+    return this.http.delete(this.baseUrl + 'basket?id=' + basket.id).subscribe(() => {
+      this.basketSource.next({id:'', items:[]});
+      this.basketTotalSource.next({shipping: 0, subtotal: 0, total: 0});
+      localStorage.removeItem('basket_id');
+    }, error => console.log(error));
+  }
+
   private createNewBasket(): IBasket {
     const basket = new Basket();
     /// save basket_id to local storage
