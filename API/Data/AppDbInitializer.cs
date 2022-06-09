@@ -3,13 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using API.Entities;
+using API.Entities.Identity;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace API.Data
 {
     public class AppDbInitializer
     {
-        public static void Seed(IApplicationBuilder applicationBuilder) {
+        public static async Task SeedAsync(IApplicationBuilder applicationBuilder) {
             using (var serviceScope = applicationBuilder.ApplicationServices.CreateScope())
             {
                 var context = serviceScope.ServiceProvider.GetService<ApplicationDbContext>();
@@ -196,6 +198,15 @@ namespace API.Data
                         context.SaveChanges();
                     }
                 }
+
+                /**
+                 * Seed users
+                 */
+                var identityContext = serviceScope.ServiceProvider.GetRequiredService<AppIdentityDbContext>();
+                identityContext.Database.Migrate();
+
+                var userManager = serviceScope.ServiceProvider.GetRequiredService<UserManager<AppUser>>();
+                await AppIdentityInitializer.SeedUserAsync(userManager);
             }
         }
     }
