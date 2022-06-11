@@ -15,7 +15,30 @@
                 {{basket.items.length}}
             </div>
         </a>
-        <a href="#" class="btn btn-outline-secondary me-3">Login</a>
-        <a href="#" class="btn btn-outline-secondary me-3">Sign up</a>
+        
+        <ng-container *ngIf="(this.accountService.currentUser$ | async) === null || (this.accountService.currentUser$ | async)?.token === ''; else displayUserProfileMenu">
+          <a routerLink="/account/login" class="btn btn-outline-secondary me-3">Login</a>
+          <a routerLink="/account/register" class="btn btn-outline-secondary me-3">Sign up</a>
+        </ng-container>
+        
+        <ng-template #displayUserProfileMenu>
+          <div class="dropdown me-5" dropdown>
+            <a style="cursor: pointer;" dropdownToggle>
+              <strong>Welcome {{(this.accountService.currentUser$ | async)?.displayName}}</strong>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right" style="cursor: pointer;" *dropdownMenu>
+              <a routerLink="/basket" class="dropdown-item d-flex align-item-center py-2">
+                <fa-icon [icon]="faShoppingCart" class="me-3"></fa-icon> View Basket
+              </a>
+              <a href="" class="dropdown-item d-flex align-item-center py-2">
+                <fa-icon [icon]="faHistory" class="me-3"></fa-icon> View Orders
+              </a>
+              <div class="dropdown-divider"></div>
+              <a (click)="logout()" class="dropdown-item d-flex align-item-center py-2">
+                <fa-icon [icon]="faSignOut" class="me-3"></fa-icon> Logout
+              </a>
+            </div>
+          </div>
+        </ng-template>
     </div>
 </div>

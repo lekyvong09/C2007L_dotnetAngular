@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { faCartShopping } from '@fortawesome/free-solid-svg-icons';
+import { faCartShopping, faShoppingCart, faHistory, faSignOut } from '@fortawesome/free-solid-svg-icons';
+import { AccountService } from '../account/account.service';
 import { BasketService } from '../basket/basket.service';
 
 @Component({
@@ -9,10 +10,14 @@ import { BasketService } from '../basket/basket.service';
 })
 export class NavBarComponent implements OnInit {
   /// FontAwesome icons
-  faCartShopping = faCartShopping;
-  constructor(public basketService: BasketService) { }
+  faCartShopping = faCartShopping; faShoppingCart = faShoppingCart; faHistory = faHistory; faSignOut = faSignOut;
+  
+  constructor(public basketService: BasketService, public accountService: AccountService) { }
 
   ngOnInit(): void {
   }
 
+  logout() {
+    this.accountService.logout();
+  }
 }

@@ -7,6 +7,8 @@ import { PagerComponent } from './pager/pager.component';
 import { SectionHeaderComponent } from './section-header/section-header.component';
 import { BreadcrumbModule } from 'xng-breadcrumb';
 import { OrderTotalsComponent } from './order-totals/order-totals.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 
 @NgModule({
   declarations: [
@@ -20,6 +22,8 @@ import { OrderTotalsComponent } from './order-totals/order-totals.component';
     PaginationModule.forRoot(),
     FontAwesomeModule,
     BreadcrumbModule,
+    ReactiveFormsModule,
+    BsDropdownModule.forRoot(),
   ],
   exports: [
     PaginationModule,
@@ -28,6 +32,8 @@ import { OrderTotalsComponent } from './order-totals/order-totals.component';
     PagerComponent,
     SectionHeaderComponent,
     OrderTotalsComponent,
+    ReactiveFormsModule,
+    BsDropdownModule,
   ]
 })
 export class SharedModule { }
