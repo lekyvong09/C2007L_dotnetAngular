@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { BehaviorSubject, map } from 'rxjs';
+import { BehaviorSubject, map, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { IUser } from '../_models/user';
 
@@ -60,8 +60,8 @@ export class AccountService {
     this.router.navigateByUrl('/');
   }
 
-  checkEmailExists(email: string) {
-    return this.http.get(this.baseUrl + 'account/emailExists?email=' + email);
+  checkEmailExists(email: string): Observable<boolean> {
+    return this.http.get<boolean>(this.baseUrl + 'account/emailExists?email=' + email);
   }
   
 }

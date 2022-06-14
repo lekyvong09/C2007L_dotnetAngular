@@ -1,0 +1,24 @@
+<div class="form-floating my-3">
+    <input
+        #input
+        [ngClass]="(controlDirective 
+                    && controlDirective.control 
+                    && controlDirective.control.touched) ? controlDirective.control.invalid ? 'is-invalid' : 'is-valid'
+                                                        : ''"
+        type="{{type}}" 
+        (input)="this.onChange($any($event).target.value)"
+        (blur)="this.onTouched()"
+        id="{{label}}"
+        class="form-control" 
+        placeholder="{{label}}">
+    <label for="{{label}}">{{label}}</label>
+
+    <div class="invalid-feedback" *ngIf="(controlDirective 
+                                        && controlDirective.control 
+                                        && controlDirective.control.invalid
+                                        && controlDirective.control.touched)">
+        <span *ngIf="controlDirective.control.errors!['required']">{{label}} is required</span>
+        <span *ngIf="controlDirective.control.errors!['pattern']">Invalid {{label}}</span>
+        <span *ngIf="controlDirective.control.errors!['myValidationEmailExists']">Email address is already in use</span>
+    </div>
+</div>

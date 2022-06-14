@@ -9,13 +9,15 @@ import { BreadcrumbModule } from 'xng-breadcrumb';
 import { OrderTotalsComponent } from './order-totals/order-totals.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { FormTextInputComponent } from './form-text-input/form-text-input.component';
 
 @NgModule({
   declarations: [
     PagingHeaderComponent,
     PagerComponent,
     SectionHeaderComponent,
-    OrderTotalsComponent
+    OrderTotalsComponent,
+    FormTextInputComponent,
   ],
   imports: [
     CommonModule,
@@ -34,6 +36,7 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
     OrderTotalsComponent,
     ReactiveFormsModule,
     BsDropdownModule,
+    FormTextInputComponent,
   ]
 })
 export class SharedModule { }
