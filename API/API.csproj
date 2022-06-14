@@ -31,6 +31,7 @@
     <None Remove="Entities\Identity\" />
     <None Remove="Services\" />
     <None Remove="Microsoft.AspNetCore.Authentication.JwtBearer" />
+    <None Remove="Entities\Checkout\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Helpers\" />
@@ -38,5 +39,6 @@
     <Folder Include="Middleware\" />
     <Folder Include="Entities\Identity\" />
     <Folder Include="Services\" />
+    <Folder Include="Entities\Checkout\" />
   </ItemGroup>
 </Project>

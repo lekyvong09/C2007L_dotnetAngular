@@ -1,7 +1,6 @@
 ﻿using System;
 using API.Dto;
 using API.Entities;
-using API.Entities.Identity;
 using AutoMapper;
 
 namespace API.Helpers
@@ -15,11 +14,13 @@ namespace API.Helpers
 				.ForMember(d => d.ProductType, o => o.MapFrom(s => s.ProductType.Name))
 				.ForMember(d => d.PictureUrl, o => o.MapFrom<ProductImageUrlResolver>());
 
-			/// bi-directional mapping
-			CreateMap<Address, AddressDto>().ReverseMap();
+			CreateMap<AddressDto, Entities.Checkout.Address>();
 
+			/// bi-directional mapping
 			CreateMap<CustomerBasketDto, CustomerBasket>();
 			CreateMap<BasketItemDto, BasketItem>();
+
+			CreateMap<Entities.Identity.Address, AddressDto>().ReverseMap();
 		}
 	}
 }

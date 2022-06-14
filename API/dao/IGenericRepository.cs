@@ -17,5 +17,15 @@ namespace API.dao
 
         /// get total records for pagination
         Task<int> CountAsync(IGenericSpecification<T> specification);
+
+
+        /**
+         * Add, Update(), Delete() won't save changes on database. But it tracks changes instead.
+         */
+        void Add(T entity);
+
+        void Update(T entity);
+
+        void Delete(T entity);
     }
 }

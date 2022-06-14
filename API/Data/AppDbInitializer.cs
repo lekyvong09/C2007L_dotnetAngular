@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using API.Entities;
+using API.Entities.Checkout;
 using API.Entities.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -194,6 +195,44 @@ namespace API.Data
                                 ProductBrandId = 4
                             }
                         });
+
+                        context.SaveChanges();
+                    }
+
+
+                    if (!context.DeliveryMethods.Any())
+                    {
+                        context.DeliveryMethods.AddRange(new List<DeliveryMethod>()
+                            {
+                                new DeliveryMethod()
+                                {
+                                    ShortName = "Fast",
+                                    DeliveryTime = "1-2 Days",
+                                    Description = "Fastest delivery time",
+                                    Price = 10
+                                },
+                                new DeliveryMethod()
+                                {
+                                    ShortName = "Normal",
+                                    DeliveryTime = "2-5 Days",
+                                    Description = "Get it within 5 days",
+                                    Price = 5
+                                },
+                                new DeliveryMethod()
+                                {
+                                    ShortName = "Economy",
+                                    DeliveryTime = "5-10 Days",
+                                    Description = "Slower but cheap",
+                                    Price = 2
+                                },
+                                new DeliveryMethod()
+                                {
+                                    ShortName = "Free",
+                                    DeliveryTime = "1-2 Weeks",
+                                    Description = "Free",
+                                    Price = 0
+                                }
+                            });
 
                         context.SaveChanges();
                     }
